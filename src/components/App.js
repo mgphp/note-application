@@ -1,40 +1,65 @@
-import React, { Component } from 'react';
-import NoteCreactionBox from './NoteCreationBox';
-import NoteList from './NoteList';
-import '../App.css';
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-const notes = [
-  {
-    "note": "John Doe",
-  },
-  {
-    "note": "Katie Smith",
-  },
-  {
-    "note": "Anna Jackson",
-  },
-];
+import NoteCreation from './NoteCreation';
+import NoteDetails from './NoteDetails';
+import NoteListBox from './NoteListBox';
+import NoteNew from './NoteNew';
+
+import data from '../data/notes';
+
+import '../App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: notes
+      notes: data
     }
+
+    this.addNote = this.addNote.bind(this);
+  }
+
+  addNote(note) {
+    this.setState({
+      notes: [...this.state.notes, note]
+    });
   }
 
   render() {
     return (
-      <div className="container">
-        <section className="container__left">
-          <NoteList notes={this.state.notes} />
-        </section>
-        <section className="container__right">
-          <NoteCreactionBox />
-        </section>
-      </div>
+      <div>
+        <div className="top__section">
+          <h1>Note Taking App</h1>
+        </div>
+        <div className="main">
+          <div className="container">
 
+            <Router>
+
+              <Switch>
+
+                <Route
+                  exact path="/"
+                  render={props => <NoteListBox addNote={this.addNote} notes={this.state.notes} {...props} />}
+                />
+                <Route exact path="/notes/new"
+                       render={props => <NoteCreation addNote={this.addNote} notes={this.state.notes} {...props} />}
+                />
+                <Route exact path="/notes/:id"
+                       render={props => <NoteDetails addNote={this.addNote} notes={this.state.notes} {...props} />}
+                />
+                <Route render={
+                  ({location}) => (
+                    <strong> Nothing matched {location.pathname} :( </strong>
+                  )}
+                />
+              </Switch>
+            </Router>
+          </div>
+        </div>
+      </div>
     );
   }
 }

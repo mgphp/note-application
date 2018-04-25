@@ -3,22 +3,30 @@ import Note from './Note';
 
 class NoteList extends React.Component {
 
-  render () {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     const notes = this.props.notes.map((note, index) => {
       return (
-        <Note note={note} key={index} removeNote={this.props.removeNote} />
+        <Note
+          note={note}
+          key={index}
+          value={index}
+          addNote={this.props.addNote}
+          removeNote={this.props.removeNote}
+          onDragStart={this.props.moveStart}/>
       );
     })
 
     return (
-
-        <div className="notes__list">
-          <div className="box__title"></div>
-          <ul>
+      <div className="container__left box--white">
+        <h2>Note List</h2>
+          <ul className="notes">
             {notes}
           </ul>
-        </div>
-
+      </div>
     )
   }
 }

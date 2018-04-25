@@ -1,40 +1,70 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import {WithContext as ReactTags} from 'react-tag-input';
 
 
-
-class NoteCreationBox extends React.Component {
+class NoteCreation extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      posted: false,
+      error: '',
+      tags: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleAddition = this.handleAddition.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
   }
 
   handleSubmit(e) {
     if (this._textArea.value !== "") {
       let newItem = {
-        note: this._textArea.value,
-        key: Date.now(),
-        category: ''
+        body: this._textArea.value,
+        id: Date.now(),
+        category: '',
+        tags: this.state.tags
       };
 
       this.setState((prevState) => {
         return {
+          posted: true,
           items: prevState.items.concat(newItem)
         };
       });
       this._textArea.value = "";
       this.props.addNote(newItem);
     }
-
     e.preventDefault();
+  }
 
+  handleDelete(i) {
+    const {tags} = this.state;
+    this.setState({
+      tags: tags.filter((tag, index) => index !== i),
+    });
+  }
+
+  handleAddition(tag) {
+    const {tags} = this.state
+    this.setState({tags: [...tags, ...[tag]]});
+  }
+
+  handleDrag(tag, currPos, newPos) {
+    const tags = [...this.state.tags];
+    const newTags = tags.slice();
+
+    newTags.splice(currPos, 1);
+    newTags.splice(newPos, 0, tag);
+
+    // re-render
+    this.setState({tags: newTags});
   }
 
   handleChange(e) {
@@ -42,33 +72,37 @@ class NoteCreationBox extends React.Component {
   }
 
   render() {
-    const {selectedOption} = this.state;
-    const value = selectedOption && selectedOption.value;
+    const {tags, suggestions} = this.state;
 
     return (
-       <form className="add-note" onSubmit={this.handleSubmit}>
-         <div className="add-note__group">
+      <section className="box-section">
+        <form className="new-note" onSubmit={this.handleSubmit}>
            <textarea
-             className="add-note__textarea"
+             className="note__textarea"
              ref={(a) => this._textArea = a}
              defaultValue={this.state.value}
            />
-           <Select
-             className="add-note__select"
-             name="form-field-name"
-             value={value}
-             onChange={this.handleChange}
-             options={[
-               {value: 'mr', label: 'Mr'},
-               {value: 'mrs', label: 'Mrs'},
-               {value: 'miss', label: 'Miss'},
-             ]}
-           />
-           <button className="add-note__button">Add Note</button>
-         </div>
-       </form>
+          <div className="note__group">
+            <ReactTags
+              tags={tags}
+              inline
+              suggestions={suggestions}
+              handleDelete={this.handleDelete}
+              handleAddition={this.handleAddition}
+              handleDrag={this.handleDrag}/>
+            <button className="btn btn-primary">Add Note</button>
+          </div>
+        </form>
+        { this.state.posted && <Redirect to="/"/> }
+      </section>
     )
   }
 }
 
-export default NoteCreationBox;
+NoteCreation.propTypes = {
+  //dispatch: React.PropTypes.func.isRequired,
+};
+
+NoteCreation = connect()(NoteCreation);
+
+export default NoteCreation;
