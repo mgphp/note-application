@@ -39,6 +39,14 @@ h1 {
     h1 {
       font-size: 2.1rem; } }
 
+h2 {
+  margin: 10px 0;
+  text-transform: uppercase;
+  font-size: 1.8rem; }
+  @media only screen and (min-width: 768px) {
+    h2 {
+      font-size: 2.0rem; } }
+
 ul {
   list-style-type: none; }
   ul li {
@@ -62,7 +70,7 @@ label {
 
 input[type='text'], input[type='email'] {
   padding: 10px;
-  font-size: 0.875rem;
+  font-size: 1.5rem;
   line-height: 1.5;
   border: 1px solid #ddd;
   width: 100%;
@@ -94,48 +102,87 @@ input[type=radio] {
     width: 100%; }
     @media only screen and (min-width: 768px) {
       .container .container__left, .container .container__right {
-        width: 50%;
-        padding: 30px 15px 0 15px; } }
+        padding: 25px 15px; } }
 
-.note-group {
-  padding-left: 0;
-  margin-bottom: 20px; }
-  .note-group .note-group__item {
-    position: relative;
-    margin-bottom: 7px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    align-items: center; }
-    .note-group .note-group__item .card-content {
-      display: flex;
-      font-size: 1.4rem;
-      border-bottom: 1px solid #ddd; }
-      .note-group .note-group__item .card-content div {
+.note {
+  display: flex;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin: 10px 10px 0 0;
+  background: #eee; }
+  .note__number {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-right: 20px; }
+  .note__body {
+    font-size: 1.4rem;
+    font-weight: 400; }
+  .note__tags {
+    margin: 10px 0;
+    display: flex; }
+    .note__tags span {
+      background: red;
+      padding: 5px;
+      margin-right: 5px;
+      color: #fff; }
+  .note__footer {
+    display: flex;
+    justify-content: flex-end; }
+    .note__footer a {
+      background-color: #62add6;
+      color: white;
+      padding: 1em 1.5em;
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-left: 15px; }
+    .note__footer a:hover {
+      background-color: #555; }
+  .note__group {
+    align-items: center;
+    padding-left: 0;
+    margin-bottom: 20px; }
+    .note__group .note-group__item {
+      position: relative;
+      margin-bottom: 7px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      align-items: center; }
+      .note__group .note-group__item .card-content {
+        display: flex;
+        font-size: 1.4rem;
+        border-bottom: 1px solid #ddd; }
+        .note__group .note-group__item .card-content div {
+          padding: 15px; }
+      .note__group .note-group__item .card-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
         padding: 15px; }
-    .note-group .note-group__item .card-footer {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      padding: 15px; }
-    .note-group .note-group__item .note__name {
-      font-size: 1.6rem; }
+      .note__group .note-group__item .note__name {
+        font-size: 1.6rem; }
 
-button {
+.block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly; }
+
+.btn {
   cursor: pointer;
-  float: right;
   height: 40px;
-  padding: 0 15px;
   font-weight: bold;
   font-size: 20px;
   color: #FFF;
-  border: none; }
-  button.add-note__button {
+  border: none;
+  text-decoration: none; }
+  .btn.btn-primary {
     text-shadow: 0px -1px 0px #000000;
     -webkit-border-radius: 8px;
     border-radius: 8px;
     border-top: 1px solid #FFF;
     background-color: #62add6; }
-  button .close {
+    .btn.btn-primary:hover {
+      background-color: #555; }
+  .btn .close {
     -webkit-appearance: none;
     padding: 0;
     cursor: pointer;
@@ -175,4 +222,18 @@ textarea {
   padding: 5px;
   margin: 0 5px;
   cursor: move;
-  border-radius: 2px; }
+  border-radius: 2px;
+  flex: 1 0 0; }
+
+.ReactTags__tags {
+  margin-bottom: 20px;
+  margin-right: 10px;
+  width: 50%; }
+  .ReactTags__tags span {
+    background: #fff; }
+
+.ReactTags__remove {
+  margin-left: 10px; }
+
+.ReactTags__tagInput {
+  margin-top: 10px; }
