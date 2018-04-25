@@ -1,6 +1,8 @@
+import types from '../actions/actionTypes';
+
 const notes = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_NOTE':
+    case types.ADD_NOTE:
       return [
         ...state,
         {
