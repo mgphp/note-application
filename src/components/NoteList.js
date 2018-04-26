@@ -21,7 +21,7 @@ class NoteList extends React.Component {
     })
 
     return (
-      <div className="container__left box--white">
+      <div className="content">
         <h2>Note List</h2>
           <ul className="notes">
             {notes}

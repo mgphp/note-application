@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NoteCreation from './NoteCreation';
 import NoteDetails from './NoteDetails';
 import NoteListBox from './NoteListBox';
-import NoteNew from './NoteNew';
 
 import data from '../data/notes';
 
@@ -19,6 +18,7 @@ class App extends Component {
     }
 
     this.addNote = this.addNote.bind(this);
+    this.removeNote = this.removeNote.bind(this);
   }
 
   addNote(note) {
@@ -27,22 +27,26 @@ class App extends Component {
     });
   }
 
+  removeNote(note) {
+    var arr = this.state.notes;
+    var index = arr.indexOf(note.note);
+    arr.splice(index, 1);
+    this.setState({notes: arr });
+  }
+
   render() {
+
     return (
-      <div>
+      <div className="main">
         <div className="top__section">
           <h1>Note Taking App</h1>
         </div>
-        <div className="main">
           <div className="container">
-
             <Router>
-
               <Switch>
-
                 <Route
                   exact path="/"
-                  render={props => <NoteListBox addNote={this.addNote} notes={this.state.notes} {...props} />}
+                  render={props => <NoteListBox addNote={this.addNote} removeNote={this.removeNote} notes={this.state.notes}  />}
                 />
                 <Route exact path="/notes/new"
                        render={props => <NoteCreation addNote={this.addNote} notes={this.state.notes} {...props} />}
@@ -57,7 +61,6 @@ class App extends Component {
                 />
               </Switch>
             </Router>
-          </div>
         </div>
       </div>
     );

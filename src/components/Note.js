@@ -17,12 +17,11 @@ class Note extends React.Component {
     this.dragStart = this.dragStart.bind(this);
     this.dragEnd = this.dragEnd.bind(this);
 
-    console.log(this.props.note);
   }
 
   onClickRemove() {
-    let name = this.props.birthday.name;
-    this.props.removeNote(name);
+    let note = this.props;
+    this.props.removeNote(note);
   }
 
   dragStart(e) {
@@ -95,18 +94,21 @@ class Note extends React.Component {
         <div className="node__content">
 
           <div className="note__body">
-            { this.props.note.body.length > 140 ?
-              this.props.note.body.substring(0, 140) + ' ...' :
+            { this.props.note.body.length > 250 ?
+              this.props.note.body.substring(0, 250) + ' ...' :
               this.props.note.body }
           </div>
-          <div className="note__tags">
-            {
-              tags
-            }
-          </div>
+
           <div className="note__footer">
-            <Link to={`notes/${this.props.note.id}`} className="card-footer-item">Edit</Link>
-            <a onClick={this.handleRemove} className="card-footer-item">Delete</a>
+            <div className="note__tags">
+              {
+                tags
+              }
+            </div>
+            <div className="note__buttons">
+              <Link to={`notes/${this.props.note.id}`} className="btn btn--primary btn--sm">Edit</Link>
+              <a onClick={this.onClickRemove} className="btn btn--primary btn--sm">Delete</a>
+            </div>
           </div>
         </div>
       </li>
@@ -114,17 +116,7 @@ class Note extends React.Component {
   }
 }
 
-//console.log(React.PropTypes);
-
-Note.propTypes = {
-  // body: React.PropTypes.string.isRequired,
-  // dateCreated: React.PropTypes.string.isRequired,
-  // dispatch: React.PropTypes.func.isRequired,
-  // id: React.PropTypes.string.isRequired,
-};
-
 Note = connect()(Note);
 
 export default Note;
 
-//export default Note;

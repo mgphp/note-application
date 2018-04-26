@@ -31,8 +31,6 @@ class NoteDetails extends React.Component {
   handleSubmit(e) {
     if (this._textArea.value !== "") {
 
-      console.log(this._textArea.value);
-
       this.setState((prevState) => {
         let newState = prevState.note[0];
         newState.body = this._textArea.value;
@@ -73,7 +71,7 @@ class NoteDetails extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e);
+
   }
 
   render() {
@@ -95,7 +93,7 @@ class NoteDetails extends React.Component {
               handleDelete={this.handleDelete}
               handleAddition={this.handleAddition}
               handleDrag={this.handleDrag}/>
-            <button className="btn btn-primary">Add Note</button>
+            <button className="btn btn--primary btn--lge">Update Note</button>
           </div>
         </form>
         { this.state.posted && <Redirect to="/"/> }
@@ -103,9 +101,6 @@ class NoteDetails extends React.Component {
     )
   }
 }
-NoteDetails.propTypes = {
-  //dispatch: React.PropTypes.func.isRequired,
-};
 
 NoteDetails = connect()(NoteDetails);
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NewNote = () => {
   return (
-    <Link to={`notes/new`} className="btn btn-primary">Add new Note</Link>
+    <Link to={`notes/new`} className="btn btn--primary btn--lge">Add new Note</Link>
   );
 }
 

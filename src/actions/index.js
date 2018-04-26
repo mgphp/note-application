@@ -16,15 +16,6 @@ export const removeNOTE = (id, text) => ({
   id,
 });
 
-export const completeNOTE = id => ({
-  type: types.COMPLETE_NOTE,
-  id,
-});
-
-export const completeAll = id => ({
-  type: types.COMPLETE_ALL,
-});
-
 export const removeCompleted = id => ({
   type: types.REMOVE_COMPLETED,
 });

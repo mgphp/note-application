@@ -9,8 +9,6 @@ class NoteListBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    console.log(this.props);
   }
 
 
@@ -21,7 +19,7 @@ class NoteListBox extends React.Component {
           <div className="block__left">
             <CSVLink
               filename={"notes.csv"}
-              className="btn btn-primary"
+              className="btn btn--primary btn--lge"
               target="_blank"
               data={this.props.notes}>Download as CSV</CSVLink>
           </div>
@@ -31,7 +29,7 @@ class NoteListBox extends React.Component {
         </div>
 
 
-        <NoteList notes={this.props.notes}/>
+        <NoteList removeNote={this.props.removeNote} notes={this.props.notes}/>
       </div>
     )
   }

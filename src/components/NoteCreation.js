@@ -90,7 +90,7 @@ class NoteCreation extends React.Component {
               handleDelete={this.handleDelete}
               handleAddition={this.handleAddition}
               handleDrag={this.handleDrag}/>
-            <button className="btn btn-primary">Add Note</button>
+            <button className="btn btn--primary btn--lge">Add Note</button>
           </div>
         </form>
         { this.state.posted && <Redirect to="/"/> }
@@ -98,10 +98,6 @@ class NoteCreation extends React.Component {
     )
   }
 }
-
-NoteCreation.propTypes = {
-  //dispatch: React.PropTypes.func.isRequired,
-};
 
 NoteCreation = connect()(NoteCreation);
 
