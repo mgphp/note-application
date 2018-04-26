@@ -2,7 +2,7 @@ import React from 'react';
 import NoteNew from './NoteNew';
 import NoteList from './NoteList';
 
-import {CSVLink, CSVDownload} from 'react-csv';
+import {CSVLink} from 'react-csv';
 
 class NoteListBox extends React.Component {
 
@@ -10,7 +10,6 @@ class NoteListBox extends React.Component {
     super(props);
     this.state = {};
   }
-
 
   render() {
     return (

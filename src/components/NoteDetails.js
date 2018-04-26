@@ -12,10 +12,10 @@ class NoteDetails extends React.Component {
   constructor(props) {
     super(props);
     let path = window.location.pathname.split('/');
-    let selected = this.props.notes.filter((note) => note.id === parseInt(path[2]));
+    let selected = this.props.notes.filter((note) => note.id == parseInt(path[2]),10);
 
     this.state = {
-      note: this.props.notes.filter((note) => note.id === parseInt(path[2])),
+      note: this.props.notes.filter((note) => note.id === parseInt(path[2]),10),
       items: [],
       posted: false,
       error: '',

@@ -36,8 +36,8 @@ class Note extends React.Component {
     Array.prototype.forEach.call(this.dragged.parentNode.childNodes, function (node) {
       if (node.className == "placeholder")
         IshasNode = true;
-
     });
+
     if (!IshasNode)
       return;
     this.dragged.parentNode.removeChild(this.placeholder);

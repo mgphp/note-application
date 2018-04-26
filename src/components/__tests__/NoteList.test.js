@@ -1,19 +1,19 @@
 import React from 'react';
-import ListBirthday from '../listBirthday';
-import { shallow, mount } from 'enzyme';
-import Data from '../../data/birthdays'
+import NoteList from '../NoteList';
+import { mount } from 'enzyme';
+import Data from '../../data/notes'
 
-describe('<ListBirthday />', () => {
+describe('<NoteList />', () => {
 
-  const component = mount(<ListBirthday birthdays={Data} />);
+  const component = mount(<NoteList notes={Data} />);
 
   it('Should render this component', () => {
     expect(component).toHaveLength(1);
   });
 
   it('It should render a box title', () => {
-    const title = component.find(".box__title");
-    expect(title.text()).toBe('All Birthdays');
+    const title = component.find("h2");
+    expect(title.text()).toBe('Note List');
   });
 
   it('It should render a list', () => {
